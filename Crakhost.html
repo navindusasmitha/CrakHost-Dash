@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CrakHost | Premium Game Panel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #050505; color: #e5e7eb; }
+        .glass { background: rgba(17, 17, 17, 0.8); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.05); }
+        .sidebar-item:hover { background: rgba(99, 102, 241, 0.1); color: #818cf8; }
+        .active-tab { border-bottom: 2px solid #6366f1; color: #6366f1; }
+        .console-box { font-family: 'Fira Code', monospace; background: #000; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+    </style>
+</head>
+<body class="overflow-hidden">
+
+    <div class="flex h-screen">
+        <!-- Sidebar -->
+        <aside class="w-64 glass border-r border-white/5 flex flex-col hidden md:flex">
+            <div class="p-6 flex items-center gap-3">
+                <div class="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center">
+                    <i data-lucide="zap" class="text-white w-5 h-5"></i>
+                </div>
+                <span class="text-xl font-bold tracking-tight text-white">CrakHost</span>
+            </div>
+
+            <nav class="flex-1 px-4 space-y-2 mt-4 text-sm font-medium text-gray-400">
+                <a href="#" class="sidebar-item flex items-center gap-3 p-3 rounded-xl text-white bg-white/5">
+                    <i data-lucide="layout-dashboard" class="w-5 h-5"></i> Dashboard
+                </a>
+                <a href="#" class="sidebar-item flex items-center gap-3 p-3 rounded-xl transition">
+                    <i data-lucide="server" class="w-5 h-5"></i> Servers
+                </a>
+                <a href="#" class="sidebar-item flex items-center gap-3 p-3 rounded-xl transition">
+                    <i data-lucide="database" class="w-5 h-5"></i> Databases
+                </a>
+                <a href="#" class="sidebar-item flex items-center gap-3 p-3 rounded-xl transition">
+                    <i data-lucide="hard-drive" class="w-5 h-5"></i> Backups
+                </a>
+                <a href="#" class="sidebar-item flex items-center gap-3 p-3 rounded-xl transition">
+                    <i data-lucide="credit-card" class="w-5 h-5"></i> Billing
+                </a>
+                <a href="#" class="sidebar-item flex items-center gap-3 p-3 rounded-xl transition">
+                    <i data-lucide="settings" class="w-5 h-5"></i> Settings
+                </a>
+            </nav>
+
+            <div class="p-4 border-t border-white/5 text-xs text-gray-500">
+                <div class="flex items-center gap-2 mb-2">
+                    <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                    System Online (v2.0.4)
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 flex flex-col overflow-y-auto">
+            <!-- Header -->
+            <header class="h-16 glass border-b border-white/5 flex items-center justify-between px-8 sticky top-0 z-10">
+                <div class="flex items-center gap-4">
+                    <span class="text-gray-500">Servers</span>
+                    <span class="text-gray-700">/</span>
+                    <span class="text-white font-medium text-sm bg-white/5 px-3 py-1 rounded-full border border-white/10">Survival-MC-01</span>
+                </div>
+                <div class="flex items-center gap-6">
+                    <div class="relative">
+                        <i data-lucide="search" class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-500"></i>
+                        <input type="text" placeholder="Search (Cmd+K)" class="bg-white/5 border border-white/10 rounded-lg py-1.5 pl-10 pr-4 text-sm focus:outline-none focus:ring-2 ring-indigo-500/50 w-64">
+                    </div>
+                    <div class="flex items-center gap-3 border-l border-white/10 pl-6">
+                        <div class="text-right">
+                            <p class="text-xs text-white font-medium">Asiri Hewage</p>
+                            <p class="text-[10px] text-indigo-400 font-bold">$42.50 Credits</p>
+                        </div>
+                        <img src="https://ui-avatars.com/api/?name=AH&background=6366f1&color=fff" class="w-8 h-8 rounded-full">
+                    </div>
+                </div>
+            </header>
+
+            <div class="p-8 max-w-7xl mx-auto w-full">
+                <!-- Action Bar -->
+                <div class="flex justify-between items-center mb-8">
+                    <div>
+                        <h1 class="text-3xl font-bold text-white mb-1">Minecraft Production</h1>
+                        <p class="text-gray-400 text-sm">Node: <span class="text-indigo-400">US-East-01</span> • IP: <span class="text-gray-200">192.168.1.45:25565</span></p>
+                    </div>
+                    <div class="flex gap-3">
+                        <button class="bg-emerald-500/10 text-emerald-500 border border-emerald-500/20 px-4 py-2 rounded-xl text-sm font-bold flex items-center gap-2 hover:bg-emerald-500 hover:text-white transition">
+                            <i data-lucide="play" class="w-4 h-4 text-emerald-500"></i> START
+                        </button>
+                        <button class="bg-orange-500/10 text-orange-500 border border-orange-500/20 px-4 py-2 rounded-xl text-sm font-bold flex items-center gap-2 hover:bg-orange-500 hover:text-white transition">
+                            <i data-lucide="rotate-cw" class="w-4 h-4"></i> RESTART
+                        </button>
+                        <button class="bg-rose-500/10 text-rose-500 border border-rose-500/20 px-4 py-2 rounded-xl text-sm font-bold flex items-center gap-2 hover:bg-rose-500 hover:text-white transition">
+                            <i data-lucide="square" class="w-4 h-4"></i> STOP
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Tabs -->
+                <div class="flex gap-8 border-b border-white/5 mb-8 text-sm font-medium text-gray-500 overflow-x-auto">
+                    <button class="pb-4 active-tab flex items-center gap-2"><i data-lucide="activity" class="w-4 h-4"></i> Overview</button>
+                    <button class="pb-4 hover:text-white flex items-center gap-2 transition"><i data-lucide="terminal" class="w-4 h-4"></i> Console</button>
+                    <button class="pb-4 hover:text-white flex items-center gap-2 transition"><i data-lucide="folder" class="w-4 h-4"></i> Files</button>
+                    <button class="pb-4 hover:text-white flex items-center gap-2 transition"><i data-lucide="shield-check" class="w-4 h-4"></i> Backups</button>
+                    <button class="pb-4 hover:text-white flex items-center gap-2 transition"><i data-lucide="users" class="w-4 h-4"></i> Users</button>
+                </div>
+
+                <!-- Stats Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+                    <div class="glass p-6 rounded-2xl">
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="text-xs font-bold text-gray-500 uppercase">CPU Usage</span>
+                            <i data-lucide="cpu" class="w-4 h-4 text-indigo-500"></i>
+                        </div>
+                        <p class="text-2xl font-bold text-white">42.8%</p>
+                        <div class="w-full bg-white/5 h-1.5 rounded-full mt-4">
+                            <div class="bg-indigo-500 h-1.5 rounded-full" style="width: 42%"></div>
+                        </div>
+                    </div>
+                    <div class="glass p-6 rounded-2xl">
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="text-xs font-bold text-gray-500 uppercase">Memory</span>
+                            <i data-lucide="layers" class="w-4 h-4 text-purple-500"></i>
+                        </div>
+                        <p class="text-2xl font-bold text-white">2.4 <span class="text-sm font-normal text-gray-500">/ 8 GB</span></p>
+                        <div class="w-full bg-white/5 h-1.5 rounded-full mt-4">
+                            <div class="bg-purple-500 h-1.5 rounded-full" style="width: 30%"></div>
+                        </div>
+                    </div>
+                    <div class="glass p-6 rounded-2xl">
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="text-xs font-bold text-gray-500 uppercase">Storage</span>
+                            <i data-lucide="hard-drive" class="w-4 h-4 text-emerald-500"></i>
+                        </div>
+                        <p class="text-2xl font-bold text-white">14.2 <span class="text-sm font-normal text-gray-500">/ 50 GB</span></p>
+                        <div class="w-full bg-white/5 h-1.5 rounded-full mt-4">
+                            <div class="bg-emerald-500 h-1.5 rounded-full" style="width: 25%"></div>
+                        </div>
+                    </div>
+                    <div class="glass p-6 rounded-2xl">
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="text-xs font-bold text-gray-500 uppercase">Uptime</span>
+                            <i data-lucide="clock" class="w-4 h-4 text-orange-500"></i>
+                        </div>
+                        <p class="text-2xl font-bold text-white">12d 4h 22m</p>
+                        <p class="text-xs text-gray-500 mt-4">Status: <span class="text-emerald-500 font-bold">HEALTHY</span></p>
+                    </div>
+                </div>
+
+                <!-- Graphs & Console Preview -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    <!-- Real-time Chart -->
+                    <div class="lg:col-span-2 glass p-6 rounded-2xl">
+                        <h3 class="text-sm font-bold text-white mb-6 uppercase tracking-wider">Performance Graph</h3>
+                        <canvas id="performanceChart" height="150"></canvas>
+                    </div>
+
+                    <!-- Mini Console -->
+                    <div class="glass rounded-2xl flex flex-col">
+                        <div class="p-4 border-b border-white/5 flex justify-between items-center">
+                            <span class="text-xs font-bold text-white">LIVE CONSOLE</span>
+                            <button class="text-xs text-indigo-400 hover:text-indigo-300">View Full</button>
+                        </div>
+                        <div class="flex-1 console-box p-4 text-[13px] overflow-hidden">
+                            <div class="text-emerald-400">[14:22:01] [Server thread/INFO]: Starting minecraft server...</div>
+                            <div class="text-gray-400">[14:22:05] [Server thread/INFO]: Loading properties</div>
+                            <div class="text-gray-400">[14:22:05] [Server thread/INFO]: Default game type: SURVIVAL</div>
+                            <div class="text-emerald-400">[14:22:10] [Server thread/INFO]: Done (4.5s)!</div>
+                            <div class="text-indigo-400 mt-2">> server_status_ok</div>
+                            <div class="text-gray-500 mt-1 animate-pulse">_</div>
+                        </div>
+                        <div class="p-3 bg-white/5 rounded-b-2xl">
+                            <input type="text" placeholder="Type a command..." class="w-full bg-transparent border-none text-sm focus:outline-none text-gray-300 px-2">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Performance Chart Initialization
+        const ctx = document.getElementById('performanceChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['1:00', '1:10', '1:20', '1:30', '1:40', '1:50', '2:00'],
+                datasets: [{
+                    label: 'CPU Usage',
+                    data: [35, 45, 40, 55, 42, 48, 42],
+                    borderColor: '#6366f1',
+                    borderWidth: 2,
+                    tension: 0.4,
+                    fill: true,
+                    backgroundColor: (context) => {
+                        const gradient = context.chart.ctx.createLinearGradient(0, 0, 0, 400);
+                        gradient.addColorStop(0, 'rgba(99, 102, 241, 0.2)');
+                        gradient.addColorStop(1, 'rgba(99, 102, 241, 0)');
+                        return gradient;
+                    },
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: { legend: { display: false } },
+                scales: {
+                    x: { grid: { display: false }, ticks: { color: '#666' } },
+                    y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#666' } }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
